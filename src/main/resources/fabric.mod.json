@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "id": "hiddenisles",
+  "version": "${version}",
+
+  "name": "Hidden Isles SMP",
+  "description": "Mod for the Hidden Isles SMP, adds gear and blocks for Salvaris!",
+  "authors": [
+    "MyShampooIsDrunk"
+  ],
+  "contact": {
+    "homepage": "https://fabricmc.net/",
+    "sources": "https://github.com/FabricMC/fabric-example-mod"
+  },
+
+  "license": "MIT",
+  "icon": "assets/modid/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "net.myshampooisdrunk.hiddenisles.HiddenIsles"
+    ]
+  },
+  "mixins": [
+    "hiddenisles.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.13.3",
+    "fabric": "*",
+    "minecraft": "1.18.x",
+    "java": ">=17"
+  },
+  "suggests": {
+    "another-mod": "*"
+  }
+}

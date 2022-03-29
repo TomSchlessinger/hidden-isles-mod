@@ -1,0 +1,71 @@
+{
+  "item.hiddenisles.primordium_ingot": "Primordium Ingot",
+  "item.hiddenisles.pristinium_ingot": "Pristinium Ingot",
+  "item.hiddenisles.coordium_ingot": "Coordium Ingot",
+  "item.hiddenisles.trocellate_ingot": "Trocellate Ingot",
+  "item.hiddenisles.domdecon_ingot": "Domdecon Ingot",
+  "item.hiddenisles.ascondellon_ingot": "Ascondellum Ingot",
+  "item.hiddenisles.arconlon_ingot": "Arconlon Ingot",
+
+  "item.hiddenisles.primordium_cluster": "Primordium Cluster",
+  "item.hiddenisles.pristinium_cluster": "Pristinium Cluster",
+  "item.hiddenisles.coordium_cluster": "Coordium Cluster",
+  "item.hiddenisles.trocellate_cluster": "Trocellate Cluster",
+  "item.hiddenisles.domdecon_cluster": "Domdecon Cluster",
+  "item.hiddenisles.ascondellon_cluster": "Ascondellum Cluster",
+  "item.hiddenisles.arconlon_cluster": "Arconlon Cluster",
+
+  "item.hiddenisles.primordium_sword": "Primordium Sword",
+  "item.hiddenisles.pristinium_sword": "Pristinium Sword",
+  "item.hiddenisles.coordium_sword": "Coordium Sword",
+  "item.hiddenisles.trocellate_sword": "Trocellate Sword",
+  "item.hiddenisles.domdecon_sword": "Domdecon Sword",
+  "item.hiddenisles.ascondellum_sword": "Ascondellum Sword",
+  "item.hiddenisles.arconlon_sword": "Arconlon Sword",
+
+
+  "item.hiddenisles.primordium_boots": "Primordium Boots",
+  "item.hiddenisles.primordium_helmet": "Primordium Helmet",
+  "item.hiddenisles.primordium_chestplate": "Primordium Chestplate",
+  "item.hiddenisles.primordium_leggings": "Primordium Leggings",
+
+  "item.hiddenisles.pristinium_boots": "Pristinium Boots",
+  "item.hiddenisles.pristinium_helmet": "Pristinium Helmet",
+  "item.hiddenisles.pristinium_chestplate": "Pristinium Chestplate",
+  "item.hiddenisles.pristinium_leggings": "Pristinium Leggings",
+
+  "item.hiddenisles.coordium_boots": "Coordium Boots",
+  "item.hiddenisles.coordium_helmet": "Coordium Helmet",
+  "item.hiddenisles.coordium_chestplate": "Coordium Chestplate",
+  "item.hiddenisles.coordium_leggings": "Coordium Leggings",
+
+  "item.hiddenisles.trocellate_boots": "Trocellate Boots",
+  "item.hiddenisles.trocellate_helmet": "Trocellate Helmet",
+  "item.hiddenisles.trocellate_chestplate": "Trocellate Chestplate",
+  "item.hiddenisles.trocellate_leggings": "Trocellate Leggings",
+
+  "item.hiddenisles.domdecon_boots": "Domdecon Boots",
+  "item.hiddenisles.domdecon_helmet": "Domdecon Helmet",
+  "item.hiddenisles.domdecon_chestplate": "Domdecon Chestplate",
+  "item.hiddenisles.domdecon_leggings": "Domdecon Leggings",
+
+  "item.hiddenisles.ascondellum_boots": "Ascondellum Boots",
+  "item.hiddenisles.ascondellum_helmet": "Ascondellum Helmet",
+  "item.hiddenisles.ascondellum_chestplate": "Ascondellum Chestplate",
+  "item.hiddenisles.ascondellum_leggings": "Ascondellum Leggings",
+
+  "item.hiddenisles.arconlon_boots": "Arconlon Boots",
+  "item.hiddenisles.arconlon_helmet": "Arconlon Helmet",
+  "item.hiddenisles.arconlon_chestplate": "Arconlon Chestplate",
+  "item.hiddenisles.arconlon_leggings": "Arconlon Leggings",
+
+  "block.hiddenisles.primordium_ore": "Primordium Ore",
+  "block.hiddenisles.pristinium_ore": "Pristinium Ore",
+  "block.hiddenisles.coordium_ore": "Coordium Ore",
+  "block.hiddenisles.trocellate_ore": "Trocellate Ore",
+  "block.hiddenisles.domdecon_ore": "Domdecon Ore",
+  "block.hiddenisles.ascondellum_ore": "Ascondellum Ore",
+  "block.hiddenisles.arconlon_ore": "Arconlon Ore",
+
+  "itemGroup.hiddenisles.hiddenislestab": "Hidden Isles"
+}

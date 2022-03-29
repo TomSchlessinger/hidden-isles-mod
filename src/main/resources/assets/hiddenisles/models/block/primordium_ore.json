@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all" : "hiddenisles:block/primordium_ore"
+  }
+}
