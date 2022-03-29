@@ -67,5 +67,8 @@
   "block.hiddenisles.ascondellum_ore": "Ascondellum Ore",
   "block.hiddenisles.arconlon_ore": "Arconlon Ore",
 
-  "itemGroup.hiddenisles.hiddenislestab": "Hidden Isles"
+  "itemGroup.hiddenisles.hiddenislestab": "Hidden Isles",
+
+  "key.hiddenisles.ability": "Use Ability",
+  "category.hiddenisles.ability": "Hidden Isles"
 }
