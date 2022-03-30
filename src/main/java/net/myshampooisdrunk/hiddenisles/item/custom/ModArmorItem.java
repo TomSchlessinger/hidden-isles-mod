@@ -12,6 +12,9 @@ import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import java.util.Calendar;
+import java.util.Timer;
+import java.util.TimerTask;
 import net.myshampooisdrunk.hiddenisles.util.MathUtils;
 
 
@@ -19,6 +22,8 @@ public class ModArmorItem extends ArmorItem {
     public ModArmorItem(ArmorMaterial material, EquipmentSlot slot, Settings settings) {
         super(material, slot, settings);
     }
+    public boolean abilityActive = false;
+
 
     @Override
     public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
@@ -27,12 +32,14 @@ public class ModArmorItem extends ArmorItem {
             if(entity instanceof PlayerEntity) {
                 PlayerEntity player = (PlayerEntity)entity;
 
+
                 if(hasFullSuitOfArmorOn(player)) {
                     if(hasSameArmor(player)){
                         final ArmorItem boots = ((ArmorItem)player.getInventory().getArmorStack(0).getItem());
                         final ArmorMaterial material = boots.getMaterial();
                         ClientTickEvents.END_CLIENT_TICK.register(client -> {
-                            while(HiddenIslesClient.ability.isPressed()){
+                            if(HiddenIslesClient.ability.isPressed() && abilityActive == false){
+                                abilityActive = true;
 
                                 Vector3d posVector = new Vector3d(
                                         player.getX(),
@@ -46,20 +53,35 @@ public class ModArmorItem extends ArmorItem {
 
                                 if(material.equals(ModArmorMaterials.PRIMORDIUM)){
 
-                                    double extraPitch = 10;
-                                    double magnitude = 2.25;
+                                    double distance = 15;
+                                    double mag = 0.1*distance;
 
-                                    Vector3d dashVector = new Vector3d(
-                                            lookVector.getX(),
-                                            lookVector.getY(),
-                                            lookVector.getZ()
+                                    double pitch = player.getPitch();
+                                    double yaw = player.getYaw();
+
+                                    double deltaXVal = mag*Math.sin(yaw);
+                                    double deltaZVal = mag*Math.cos(yaw);
+                                    double deltaYVal = mag*Math.sin(pitch);
+
+
+
+                                    Vec3d dashVector = new Vec3d(
+                                            deltaXVal,
+                                            deltaYVal,
+                                            deltaZVal
                                     );
 
-                                    float initialYaw = (float) MathUtils.getYaw(dashVector);
+                                    System.out.print(Math.sqrt(dashVector.x * dashVector.x + dashVector.y * dashVector.y + dashVector.z * dashVector.z));
+
+                                    System.out.println("x vel: " + deltaXVal + " \ny vel:"+ deltaYVal + " \nz vel:"+ deltaZVal);
+
+                                    player.setVelocity(dashVector);
+
+                                    /*float initialYaw = (float) player.getYaw();
 
                                     dashVector = MathUtils.rotateYaw(dashVector, initialYaw);
 
-                                    double dashPitch = Math.toDegrees(MathUtils.getPitch(dashVector));
+                                    double dashPitch = Math.toDegrees(player.getYaw());
 
                                     if (dashPitch + extraPitch > 90) {
                                         dashVector = new Vector3d(0, 1, 0);
@@ -80,7 +102,7 @@ public class ModArmorItem extends ArmorItem {
                                             dashVector.x,
                                             dashVector.y,
                                             dashVector.z
-                                    );
+                                    );*/
 
                                     player.velocityModified = true;
 
@@ -103,6 +125,8 @@ public class ModArmorItem extends ArmorItem {
                                 else if(material.equals(ModArmorMaterials.ARCONLON)){
                                     System.out.println("Wear some real armor");
                                 }
+                            }else{
+                                abilityActive = false;
                             }
                         });
                     }
