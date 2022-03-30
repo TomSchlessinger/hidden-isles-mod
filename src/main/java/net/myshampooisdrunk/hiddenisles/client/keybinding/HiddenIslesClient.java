@@ -10,7 +10,7 @@ import net.minecraft.text.LiteralText;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
-        import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 
 public class HiddenIslesClient implements ClientModInitializer {
     //public static boolean isActivated = false;
@@ -18,11 +18,12 @@ public class HiddenIslesClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        KeyBinding ability = KeyBindingHelper.registerKeyBinding(new KeyBinding(
+        System.out.println("client init");
+        ability = KeyBindingHelper.registerKeyBinding(new KeyBinding(
                 "key.hiddenisles.ability",
                 InputUtil.Type.KEYSYM,
                 GLFW.GLFW_KEY_R,
-                "category.hiddenisles.ability"
+                "category.hiddenisles.keys"
         ));
 
         /*ClientTickEvents.END_CLIENT_TICK.register(client -> {

@@ -1,49 +1,111 @@
 package net.myshampooisdrunk.hiddenisles.item.custom;
 
-import com.google.common.collect.ImmutableMap;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
-import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
-import net.minecraft.client.option.KeyBinding;
-import net.minecraft.client.util.InputUtil;
-import net.minecraft.text.LiteralText;
+import net.minecraft.client.util.math.Vector3d;
+import net.minecraft.util.math.Vec3d;
 import net.myshampooisdrunk.hiddenisles.client.keybinding.HiddenIslesClient;
 import net.myshampooisdrunk.hiddenisles.item.ModArmorMaterials;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import org.lwjgl.glfw.GLFW;
+import net.myshampooisdrunk.hiddenisles.util.MathUtils;
 
-import java.util.Map;
 
 public class ModArmorItem extends ArmorItem {
     public ModArmorItem(ArmorMaterial material, EquipmentSlot slot, Settings settings) {
         super(material, slot, settings);
     }
-    private final KeyBinding abilityKey = KeyBindingHelper.registerKeyBinding(new KeyBinding(
-            "key.hiddenisles.ability", // The translation key of the keybinding's name
-            InputUtil.Type.KEYSYM, // The type of the keybinding, KEYSYM for keyboard, MOUSE for mouse.
-            GLFW.GLFW_KEY_R, // The keycode of the key
-            "category.hiddenisles.ability" // The translation key of the keybinding's category.
-    ));
 
     @Override
     public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
+
         if(!world.isClient()) {
             if(entity instanceof PlayerEntity) {
                 PlayerEntity player = (PlayerEntity)entity;
 
                 if(hasFullSuitOfArmorOn(player)) {
-                    ClientTickEvents.END_CLIENT_TICK.register(client -> {
-                        while (HiddenIslesClient.ability.wasPressed()) {
-                            client.player.sendMessage(new LiteralText("Key 1 was pressed!"), false);
-                        }
-                    });
+                    if(hasSameArmor(player)){
+                        final ArmorItem boots = ((ArmorItem)player.getInventory().getArmorStack(0).getItem());
+                        final ArmorMaterial material = boots.getMaterial();
+                        ClientTickEvents.END_CLIENT_TICK.register(client -> {
+                            while(HiddenIslesClient.ability.isPressed()){
+
+                                Vector3d posVector = new Vector3d(
+                                        player.getX(),
+                                        player.getY(),
+                                        player.getZ()
+                                );
+                                Vec3d lookVector = player.getRotationVector();
+
+
+
+
+                                if(material.equals(ModArmorMaterials.PRIMORDIUM)){
+
+                                    double extraPitch = 10;
+                                    double magnitude = 2.25;
+
+                                    Vector3d dashVector = new Vector3d(
+                                            lookVector.getX(),
+                                            lookVector.getY(),
+                                            lookVector.getZ()
+                                    );
+
+                                    float initialYaw = (float) MathUtils.getYaw(dashVector);
+
+                                    dashVector = MathUtils.rotateYaw(dashVector, initialYaw);
+
+                                    double dashPitch = Math.toDegrees(MathUtils.getPitch(dashVector));
+
+                                    if (dashPitch + extraPitch > 90) {
+                                        dashVector = new Vector3d(0, 1, 0);
+                                        dashPitch = 90;
+                                    } else {
+                                        dashVector = MathUtils.rotateRoll(dashVector, (float) Math.toRadians(-extraPitch));
+                                        dashVector = MathUtils.rotateYaw(dashVector, -initialYaw);
+                                        dashVector = MathUtils.normalize(dashVector);
+                                    }
+
+                                    double coef = 1.6 - MathUtils.map( Math.abs(dashPitch),
+                                            0.0d, 90.0d,
+                                            0.6, 1.0d);
+
+                                    dashVector.multiply(magnitude * coef);
+                                    //System.out.println("x vel: " + dashVector.x + " \ny vel:"+ dashVector.y + " \nz vel:"+ dashVector.z);
+                                    player.addVelocity(
+                                            dashVector.x,
+                                            dashVector.y,
+                                            dashVector.z
+                                    );
+
+                                    player.velocityModified = true;
+
+                                }
+                                else if(material.equals(ModArmorMaterials.PRISTINIUM)){
+                                    System.out.println("Wear some real armor");
+                                }
+                                else if(material.equals(ModArmorMaterials.COORDIUM)){
+                                    System.out.println("Wear some real armor");
+                                }
+                                else if(material.equals(ModArmorMaterials.TROCELLATE)){
+                                    System.out.println("Wear some real armor");
+                                }
+                                else if(material.equals(ModArmorMaterials.DOMDECON)){
+                                    System.out.println("Wear some real armor");
+                                }
+                                else if(material.equals(ModArmorMaterials.ASCONDELLUM)){
+                                    System.out.println("Wear some real armor");
+                                }
+                                else if(material.equals(ModArmorMaterials.ARCONLON)){
+                                    System.out.println("Wear some real armor");
+                                }
+                            }
+                        });
+                    }
                 }
             }
         }
@@ -61,15 +123,13 @@ public class ModArmorItem extends ArmorItem {
                 && !leggings.isEmpty() && !boots.isEmpty();
     }
 
-    private boolean hasCorrectArmorOn(ArmorMaterial material, PlayerEntity player) {
+    private boolean hasSameArmor(PlayerEntity player){
         ArmorItem boots = ((ArmorItem)player.getInventory().getArmorStack(0).getItem());
         ArmorItem leggings = ((ArmorItem)player.getInventory().getArmorStack(1).getItem());
         ArmorItem breastplate = ((ArmorItem)player.getInventory().getArmorStack(2).getItem());
         ArmorItem helmet = ((ArmorItem)player.getInventory().getArmorStack(3).getItem());
-
-        return helmet.getMaterial() == material && breastplate.getMaterial() == material &&
-                leggings.getMaterial() == material && boots.getMaterial() == material;
+        return helmet.getMaterial() == breastplate.getMaterial() && breastplate.getMaterial() == leggings.getMaterial() &&
+                leggings.getMaterial() == boots.getMaterial();
     }
-
 
 }
