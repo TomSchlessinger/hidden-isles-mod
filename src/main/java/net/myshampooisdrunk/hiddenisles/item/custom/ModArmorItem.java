@@ -1,7 +1,14 @@
 package net.myshampooisdrunk.hiddenisles.item.custom;
 
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
+import net.minecraft.client.render.RenderTickCounter;
 import net.minecraft.client.util.math.Vector3d;
+import net.minecraft.entity.SpawnRestriction;
+import net.minecraft.particle.ParticleTypes;
+import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.Vec3d;
 import net.myshampooisdrunk.hiddenisles.client.keybinding.HiddenIslesClient;
 import net.myshampooisdrunk.hiddenisles.item.ModArmorMaterials;
@@ -29,8 +36,7 @@ public class ModArmorItem extends ArmorItem {
     public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
 
         if(!world.isClient()) {
-            if(entity instanceof PlayerEntity) {
-                PlayerEntity player = (PlayerEntity)entity;
+            if(entity instanceof PlayerEntity player) {
 
 
                 if(hasFullSuitOfArmorOn(player)) {
@@ -38,7 +44,8 @@ public class ModArmorItem extends ArmorItem {
                         final ArmorItem boots = ((ArmorItem)player.getInventory().getArmorStack(0).getItem());
                         final ArmorMaterial material = boots.getMaterial();
                         ClientTickEvents.END_CLIENT_TICK.register(client -> {
-                            if(HiddenIslesClient.ability.isPressed() && abilityActive == false){
+                            if(HiddenIslesClient.ability.isPressed() && !abilityActive){
+
                                 abilityActive = true;
 
                                 Vector3d posVector = new Vector3d(
@@ -46,7 +53,8 @@ public class ModArmorItem extends ArmorItem {
                                         player.getY(),
                                         player.getZ()
                                 );
-                                Vec3d lookVector = player.getRotationVector();
+                                RenderTickCounter ref = new RenderTickCounter(0, 0);
+                                Vec3d lookVector = player.getRotationVec(1.0f);
 
 
 
@@ -75,8 +83,15 @@ public class ModArmorItem extends ArmorItem {
 
                                     System.out.println("x vel: " + deltaXVal + " \ny vel:"+ deltaYVal + " \nz vel:"+ deltaZVal);
 
-                                    player.setVelocity(dashVector);
-
+                                   //player.setVelocity(dashVector);
+                                    player.addVelocity(
+                                            15*lookVector.getX(),
+                                            15*lookVector.getY(),
+                                            15*lookVector.getZ()
+                                    );
+                                    world.playSound(null, posVector.x,posVector.y,posVector.z, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS,1f,1f);
+                                    ((ServerWorld) player.world).spawnParticles(ParticleTypes.POOF, posVector.x,posVector.y,posVector.z, 50, 1D, 0.5D, 1D, 0.0D);
+                                    world.getTime()
                                     /*float initialYaw = (float) player.getYaw();
 
                                     dashVector = MathUtils.rotateYaw(dashVector, initialYaw);

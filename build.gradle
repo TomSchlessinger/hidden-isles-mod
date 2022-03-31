@@ -11,6 +11,10 @@ version = project.mod_version
 group = project.maven_group
 
 repositories {
+	maven {
+		name = 'Ladysnake Mods'
+		url = 'https://ladysnake.jfrog.io/artifactory/mods'
+	}
 	// Add repositories to retrieve artifacts from in here.
 	// You should only use this when depending on other mods because
 	// Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
@@ -26,7 +30,12 @@ dependencies {
 
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+
+	modImplementation "dev.onyxstudios.cardinal-components-api:cardinal-components-base:4.1.4"
+	modImplementation "dev.onyxstudios.cardinal-components-api:cardinal-components-entity:4.1.4"//in the future remember to download cardinal components 4.1.4 from github
+
 }
+
 
 processResources {
 	inputs.property "version", project.version
