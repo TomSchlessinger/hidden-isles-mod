@@ -56,68 +56,17 @@ public class ModArmorItem extends ArmorItem {
                                 RenderTickCounter ref = new RenderTickCounter(0, 0);
                                 Vec3d lookVector = player.getRotationVec(1.0f);
 
-
-
-
                                 if(material.equals(ModArmorMaterials.PRIMORDIUM)){
-
                                     double distance = 15;
-                                    double mag = 0.1*distance;
 
-                                    double pitch = player.getPitch();
-                                    double yaw = player.getYaw();
-
-                                    double deltaXVal = mag*Math.sin(yaw);
-                                    double deltaZVal = mag*Math.cos(yaw);
-                                    double deltaYVal = mag*Math.sin(pitch);
-
-
-
-                                    Vec3d dashVector = new Vec3d(
-                                            deltaXVal,
-                                            deltaYVal,
-                                            deltaZVal
-                                    );
-
-                                    System.out.print(Math.sqrt(dashVector.x * dashVector.x + dashVector.y * dashVector.y + dashVector.z * dashVector.z));
-
-                                    System.out.println("x vel: " + deltaXVal + " \ny vel:"+ deltaYVal + " \nz vel:"+ deltaZVal);
-
-                                   //player.setVelocity(dashVector);
                                     player.addVelocity(
-                                            15*lookVector.getX(),
-                                            15*lookVector.getY(),
-                                            15*lookVector.getZ()
+                                            distance*lookVector.getX(),
+                                            distance*lookVector.getY(),
+                                            distance*lookVector.getZ()
                                     );
                                     world.playSound(null, posVector.x,posVector.y,posVector.z, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS,1f,1f);
                                     ((ServerWorld) player.world).spawnParticles(ParticleTypes.POOF, posVector.x,posVector.y,posVector.z, 50, 1D, 0.5D, 1D, 0.0D);
-                                    world.getTime()
-                                    /*float initialYaw = (float) player.getYaw();
 
-                                    dashVector = MathUtils.rotateYaw(dashVector, initialYaw);
-
-                                    double dashPitch = Math.toDegrees(player.getYaw());
-
-                                    if (dashPitch + extraPitch > 90) {
-                                        dashVector = new Vector3d(0, 1, 0);
-                                        dashPitch = 90;
-                                    } else {
-                                        dashVector = MathUtils.rotateRoll(dashVector, (float) Math.toRadians(-extraPitch));
-                                        dashVector = MathUtils.rotateYaw(dashVector, -initialYaw);
-                                        dashVector = MathUtils.normalize(dashVector);
-                                    }
-
-                                    double coef = 1.6 - MathUtils.map( Math.abs(dashPitch),
-                                            0.0d, 90.0d,
-                                            0.6, 1.0d);
-
-                                    dashVector.multiply(magnitude * coef);
-                                    //System.out.println("x vel: " + dashVector.x + " \ny vel:"+ dashVector.y + " \nz vel:"+ dashVector.z);
-                                    player.addVelocity(
-                                            dashVector.x,
-                                            dashVector.y,
-                                            dashVector.z
-                                    );*/
 
                                     player.velocityModified = true;
 

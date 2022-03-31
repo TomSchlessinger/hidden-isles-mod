@@ -32,7 +32,7 @@ dependencies {
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
 	modImplementation "dev.onyxstudios.cardinal-components-api:cardinal-components-base:4.1.4"
-	modImplementation "dev.onyxstudios.cardinal-components-api:cardinal-components-entity:4.1.4"//in the future remember to download cardinal components 4.1.4 from github
+	modImplementation "dev.onyxstudios.cardinal-components-api:cardinal-components-entity:4.1.4"
 
 }
 
