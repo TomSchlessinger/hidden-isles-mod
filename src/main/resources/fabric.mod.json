@@ -19,6 +19,9 @@
   "entrypoints": {
     "main": [
       "net.myshampooisdrunk.hiddenisles.HiddenIsles"
+    ],
+    "client": [
+      "net.myshampooisdrunk.hiddenisles.client.keybinding.HiddenIslesClient"
     ]
   },
   "mixins": [
@@ -32,14 +35,10 @@
     "java": ">=17",
     "fabric-api-base": "*",
     "fabric-lifecycle-events-v1": "*",
-    "fabric-key-binding-api-v1": "*"
+    "fabric-key-binding-api-v1": "*",
+    "geckolib3": ">=3.0.30"
   },
   "suggests": {
     "another-mod": "*"
-  },
-  "entrypoints": {
-    "client": [
-      "net.myshampooisdrunk.hiddenisles.client.keybinding.HiddenIslesClient"
-    ]
   }
 }

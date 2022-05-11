@@ -11,17 +11,17 @@ import net.minecraft.util.Lazy;
 
 import java.util.function.Supplier;
 
-public enum ModArmorMaterials implements  ArmorMaterial{
+public enum ModArmorMaterials implements ArmorMaterial{
     PRIMORDIUM("primordium", 60, new int[]{3, 8, 9, 4}, 15, SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, 3F, 0.1F, () -> Ingredient.ofItems(ModItems.PRIMORDIUM_INGOT)
-    ),PRISTINIUM("pristinium,", 80, new int[]{5, 10, 11, 6}, 11, SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, 4F, 0.1F, () -> Ingredient.ofItems(ModItems.PRISTINIUM_INGOT)
+    ),PRISTINIUM("pristinium", 80, new int[]{5, 10, 11, 6}, 11, SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, 4F, 0.1F, () -> Ingredient.ofItems(ModItems.PRISTINIUM_INGOT)
     ),COORDIUM("coordium", 60, new int[]{3, 8, 9, 4}, 11, SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, 3F, 0.1F, () -> Ingredient.ofItems(ModItems.COORDIUM_INGOT)
-    ),TROCELLATE("trocellate", 50, new int[]{3, 7, 8, 4}, 17, SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, 2.5F, 0.1F, () -> Ingredient.ofItems(ModItems.TROCELLATE_INGOT)
-    ),DOMDECON("domdecon", 50, new int[]{3, 7, 8, 4}, 24, SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, 2.5F, 0.1F, () -> Ingredient.ofItems(ModItems.DOMDECON_INGOT)
-    ),ASCONDELLUM("ascondellum", 50, new int[]{3, 7, 8, 4}, 20, SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, 2.5F, 0.1F, () -> Ingredient.ofItems(ModItems.ASCONDELLUM_INGOT)
-    ),ARCONLON("arcanlon", 60, new int[]{3, 8, 9, 4}, 17, SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, 3F, 0.1F, () -> Ingredient.ofItems(ModItems.ARCONLON_INGOT)
+    ),TROCELLATE("trocellate", 50, new int[]{3, 7, 8, 4}, 19, SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, 2.5F, 0.1F, () -> Ingredient.ofItems(ModItems.TROCELLATE_INGOT)
+    ),DOMDECON("domdecon", 50, new int[]{3, 7, 8, 4}, 23, SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, 2.5F, 0.1F, () -> Ingredient.ofItems(ModItems.DOMDECON_INGOT)
+    ),ASCONDELLUM("ascondellum", 70, new int[]{4, 10, 9, 5}, 28, SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, 3.5F, 0.1F, () -> Ingredient.ofItems(ModItems.ASCONDELLUM_INGOT)
+    ),ARCONLON("arcanlon", 60, new int[]{3, 8, 9, 4}, 19, SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, 3F, 0.1F, () -> Ingredient.ofItems(ModItems.ARCONLON_INGOT)
     );
 
-    private static final int[] BASE_DURABILITY = new int[]{13, 15, 16, 11};
+    private static final int[] BASE_DURABILITY = new int[]{15, 18, 17, 13};
     private final String name;
     private final int durabilityMultiplier;
     private final int[] protectionAmounts;

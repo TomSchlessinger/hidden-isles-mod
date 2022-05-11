@@ -70,5 +70,11 @@
   "itemGroup.hiddenisles.hiddenislestab": "Hidden Isles",
 
   "key.hiddenisles.ability": "Use Ability",
-  "category.hiddenisles.keys": "Hidden Isles"
+  "category.hiddenisles.keys": "Hidden Isles",
+
+  "effect.hiddenisles.pristinium_strength": "Pristinium Resistance",
+  "effect.hiddenisles.coordium_strength": "Coordium Rage",
+  "effect.hiddenisles.broken_armor": "Broken Armor"
+
+
 }

@@ -17,13 +17,13 @@ public enum ModToolMaterials implements ToolMaterial {
             () -> Ingredient.ofItems(ModItems.PRISTINIUM_INGOT)
     ),COORDIUM(MiningLevels.NETHERITE, 4500, 10.0F, 8.5F, 11,
             () -> Ingredient.ofItems(ModItems.COORDIUM_INGOT)
-    ),TROCELLATE(MiningLevels.NETHERITE, 4500, 16.0F, 6.5F, 17,
+    ),TROCELLATE(MiningLevels.NETHERITE, 4500, 16.0F, 6.5F, 19,
             () -> Ingredient.ofItems(ModItems.TROCELLATE_INGOT)
-    ),DOMDECON(MiningLevels.NETHERITE, 4500, 22.0F, 2.5F, 24,
+    ),DOMDECON(MiningLevels.NETHERITE, 4500, 22.0F, 2.5F, 23,
             () -> Ingredient.ofItems(ModItems.DOMDECON_INGOT)
-    ),ASCONDELLUM(MiningLevels.NETHERITE, 4500, 19.0F, 4.5F, 20,
+    ),ASCONDELLUM(MiningLevels.NETHERITE, 4500, 19.0F, 6.5F, 28,
             () -> Ingredient.ofItems(ModItems.ASCONDELLUM_INGOT)
-    ),ARCONLON(MiningLevels.NETHERITE, 4500, 16.0F, 4.5F, 17,
+    ),ARCONLON(MiningLevels.NETHERITE, 4500, 16.0F, 4.5F, 19,
             () -> Ingredient.ofItems(ModItems.ARCONLON_INGOT)
     );
 
