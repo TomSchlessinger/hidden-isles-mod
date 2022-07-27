@@ -140,7 +140,7 @@ public class ModArmorItem extends ArmorItem  implements IAnimatable {
                                         Targets.forEach(T -> {
                                             Vec3d TargetPos = T.getPos();
                                             TrocellateMissile missile = new TrocellateMissile(player.getWorld(), TargetPos.x, TargetPos.y + 7.5d, TargetPos.z, player);
-                                            missile.setVelocity(0.0d, -1.0d, 0.0d);
+                                            missile.setVelocity(0.0d, 0.0d, 0.0d);
                                             player.getWorld().spawnEntity(missile);
                                         });
 

@@ -4,12 +4,12 @@ import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.entity.EquipmentSlot;
 
 import net.minecraft.item.ItemGroup;
-import net.minecraft.item.SwordItem;
 import net.myshampooisdrunk.hiddenisles.HiddenIsles;
 import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.myshampooisdrunk.hiddenisles.item.custom.ModArmorItem;
+import net.myshampooisdrunk.hiddenisles.item.custom.ModSwordItem;
 
 public class ModItems {
     //ores
@@ -32,25 +32,25 @@ public class ModItems {
 
     //tools/weapons
     public static final Item PRIMORDIUM_BLADE = registerItem("primordium_sword",
-            new SwordItem(ModToolMaterials.PRIMORDIUM , 13, -2.4f , new FabricItemSettings().group(ModItemGroup.HIDDENISLESTAB)));//base attack speed is 4 so negative numbers are needed for desirable outcome
+            new ModSwordItem(ModToolMaterials.PRIMORDIUM , 13, -2.4f , new FabricItemSettings().group(ModItemGroup.HIDDENISLESTAB)));//base attack speed is 4 so negative numbers are needed for desirable outcome
 
     public static final Item PRISTINIUM_BLADE = registerItem("pristinium_sword",
-            new SwordItem(ModToolMaterials.PRISTINIUM , 13, -2.4f , new FabricItemSettings().group(ModItemGroup.HIDDENISLESTAB)));
+            new ModSwordItem(ModToolMaterials.PRISTINIUM , 13, -2.4f , new FabricItemSettings().group(ModItemGroup.HIDDENISLESTAB)));
 
     public static final Item COORDIUM_BLADE = registerItem("coordium_sword",
-            new SwordItem(ModToolMaterials.COORDIUM , 14, -2.4f , new FabricItemSettings().group(ModItemGroup.HIDDENISLESTAB)));
+            new ModSwordItem(ModToolMaterials.COORDIUM , 14, -2.4f , new FabricItemSettings().group(ModItemGroup.HIDDENISLESTAB)));
 
     public static final Item TROCELLATE_BLADE = registerItem("trocellate_sword",
-            new SwordItem(ModToolMaterials.TROCELLATE , 13, -2.4f , new FabricItemSettings().group(ModItemGroup.HIDDENISLESTAB)));
+            new ModSwordItem(ModToolMaterials.TROCELLATE , 13, -2.4f , new FabricItemSettings().group(ModItemGroup.HIDDENISLESTAB)));
 
     public static final Item DOMDECON_BLADE = registerItem("domdecon_sword",
-            new SwordItem(ModToolMaterials.DOMDECON , 13, -2.4f , new FabricItemSettings().group(ModItemGroup.HIDDENISLESTAB)));
+            new ModSwordItem(ModToolMaterials.DOMDECON , 13, -2.4f , new FabricItemSettings().group(ModItemGroup.HIDDENISLESTAB)));
 
     public static final Item ASCONDELLUM_BLADE = registerItem("ascondellum_sword",
-            new SwordItem(ModToolMaterials.ASCONDELLUM , 13, -2.4f , new FabricItemSettings().group(ModItemGroup.HIDDENISLESTAB)));
+            new ModSwordItem(ModToolMaterials.ASCONDELLUM , 13, -2.4f , new FabricItemSettings().group(ModItemGroup.HIDDENISLESTAB)));
 
     public static final Item ARCONLON_BLADE = registerItem("arconlon_sword",
-            new SwordItem(ModToolMaterials.ARCONLON , 13, -2.4f , new FabricItemSettings().group(ModItemGroup.HIDDENISLESTAB)));
+            new ModSwordItem(ModToolMaterials.ARCONLON , 13, -2.4f , new FabricItemSettings().group(ModItemGroup.HIDDENISLESTAB)));
 
     //armor
     public static final Item PRIMORDIUM_HELMET = registerItem("primordium_helmet", new ModArmorItem(ModArmorMaterials.PRIMORDIUM, EquipmentSlot.HEAD,
