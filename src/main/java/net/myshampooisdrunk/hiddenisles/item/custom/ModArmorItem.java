@@ -44,14 +44,16 @@ import static net.myshampooisdrunk.hiddenisles.item.ModItems.*;
 public class ModArmorItem extends ArmorItem  implements IAnimatable {
 
     private AnimationFactory factory = new AnimationFactory(this);
-
+    
+    
+    
     @Override
     public void registerControllers(AnimationData aData) {
         aData.addAnimationController(new AnimationController<ModArmorItem>(this,"controller",20,this::predicate));
     }
 
     private <P extends IAnimatable> PlayState predicate(AnimationEvent<P> event){
-        event.getController().setAnimation(new AnimationBuilder().addAnimation("idle",true));
+        event.getController().setAnimation(new AnimationBuilder().addAnimation("default",true));
         return PlayState.CONTINUE;
     }
 
@@ -78,12 +80,12 @@ public class ModArmorItem extends ArmorItem  implements IAnimatable {
                             if(HiddenIslesClient.ability.isPressed()){
                                 Vec3d pos = player.getPos();
                                 Vec3d lookVector = player.getRotationVec(1.0f);
-
+                                double dashMult = 2.3;
                                 if( ((ArmorItem) player.getInventory().getArmorStack(0).getItem()).getMaterial().equals(ModArmorMaterials.PRIMORDIUM)){
                                     if(!((ArmorCooldown)player).getManager().isCoolingDown(PRIMORDIUM_CHESTPLATE)){
-                                        player.setVelocity(1.92 * lookVector.getX(), 1.92 * lookVector.getY(), 1.92 * lookVector.getZ());
+                                        player.setVelocity(dashMult * lookVector.getX(), dashMult * lookVector.getY(), dashMult * lookVector.getZ());
                                         player.velocityModified = true;
-                                        ((ArmorCooldown) player).getManager().set(PRIMORDIUM_CHESTPLATE, 300);
+                                        ((ArmorCooldown) player).getManager().set(PRIMORDIUM_CHESTPLATE, 200);
                                     }
                                 }
                                 else if(((ArmorItem) player.getInventory().getArmorStack(0).getItem()).getMaterial().equals(ModArmorMaterials.PRISTINIUM)){
@@ -108,26 +110,26 @@ public class ModArmorItem extends ArmorItem  implements IAnimatable {
                                         List<LivingEntity> PotTargets3 = new ArrayList<>(List.of());
                                         List<LivingEntity> PotTargets4 = new ArrayList<>(List.of());
                                         List<LivingEntity> Targets = new ArrayList<>(List.of());
-                                        System.out.println(PotTargets.size());
+                                        //System.out.println(PotTargets.size());
                                         PotTargets.forEach(E -> {
                                             if (E instanceof LivingEntity L) {
                                                 PotTargets2.add(L);
                                             }
                                         });
-                                        System.out.println(PotTargets2.size());
+                                        //System.out.println(PotTargets2.size());
                                         PotTargets2.forEach(L -> {
                                             if(!(L instanceof PassiveEntity P || L instanceof AmbientEntity A || L instanceof WaterCreatureEntity W)){
                                                 PotTargets3.add(L);
                                             }
 
                                         });
-                                        System.out.println(PotTargets3.size());
+                                        //System.out.println(PotTargets3.size());
                                         PotTargets3.forEach(L -> {
                                             if (!player.isTeammate(L)) {
                                                 PotTargets4.add(L);
                                             }
                                         });
-                                        System.out.println(PotTargets4.size());
+                                        //System.out.println(PotTargets4.size());
                                         PotTargets4.forEach(L -> {
                                             if(!(L instanceof TameableEntity T)){
                                                 Targets.add(L);
@@ -136,11 +138,11 @@ public class ModArmorItem extends ArmorItem  implements IAnimatable {
                                                 if (T.getOwnerUuid() != null) {if (T.getOwnerUuid() != player.getUuid()) {Targets.add(T);}}
                                             }
                                         });
-                                        System.out.println(Targets.size());
+                                        //System.out.println(Targets.size());
                                         Targets.forEach(T -> {
                                             Vec3d TargetPos = T.getPos();
-                                            TrocellateMissile missile = new TrocellateMissile(player.getWorld(), TargetPos.x, TargetPos.y + 7.5d, TargetPos.z, player);
-                                            missile.setVelocity(0.0d, 0.0d, 0.0d);
+                                            TrocellateMissile missile = new TrocellateMissile(player.getWorld(), TargetPos.x, TargetPos.y + 7.5d, TargetPos.z, player,0);
+                                            missile.setVelocity(0.0d, -1.0d, 0.0d);
                                             player.getWorld().spawnEntity(missile);
                                         });
 
@@ -152,7 +154,7 @@ public class ModArmorItem extends ArmorItem  implements IAnimatable {
                                         Box effectBox = new Box(pos.x, pos.y, pos.z, pos.x, pos.y, pos.z);
                                         effectBox = effectBox.expand(55.0);
                                         List<Entity> EList = player.getWorld().getOtherEntities(player, effectBox);
-                                        System.out.println(EList.size());
+                                        //System.out.println(EList.size());
                                         EList.forEach(E -> {
                                             if (E instanceof LivingEntity L) {
                                                 ((LivingEntity) L).addStatusEffect(new StatusEffectInstance(StatusEffects.GLOWING, 600, 0, true, false, false));

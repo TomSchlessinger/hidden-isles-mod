@@ -26,33 +26,17 @@ public class ModSwordItem extends SwordItem {
 
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
-        if(player.getMainHandStack().getItem().equals(ModItems.COORDIUM_BLADE)){
-            if (world.isClient()) {
+        if(player.getStackInHand(hand).getItem().equals(ModItems.TROCELLATE_BLADE) ){
+            if (!world.isClient()) {
                 Vec3d pos = player.getPos();
                 Vec3d lookVector = player.getRotationVec(1.0f);
-                TrocellateMissile missile = new TrocellateMissile(player.getWorld(), pos.x + lookVector.x, pos.y + lookVector.y, pos.z + lookVector.z, player);
-                missile.setVelocity(1.45 * lookVector.x, 1.45 * lookVector.y, 1.45 * lookVector.z);
+                TrocellateMissile missile = new TrocellateMissile(player.getWorld(), pos.x, pos.y + 1 , pos.z, player, 1);
+                missile.setVelocity(1.7 * lookVector.x, 1.7 * lookVector.y, 1.7 * lookVector.z);
                 player.getWorld().spawnEntity(missile);
-                System.out.println("hi");
             }
         }
 
         return super.use(world, player, hand);
 
-    }
-
-    public ActionResult useOnBlock(ItemUsageContext context){
-        if(context.getWorld().isClient()) {
-            PlayerEntity player = context.getPlayer();
-            Vec3d pos = player.getPos();
-            Vec3d lookVector = player.getRotationVec(1.0f);
-            TrocellateMissile missile = new TrocellateMissile(player.getWorld(), pos.x+lookVector.x, pos.y+lookVector.y, pos.z+lookVector.z, player);
-            missile.setVelocity(1.45 * lookVector.x, 1.45 * lookVector.y, 1.45 * lookVector.z);
-            player.getWorld().spawnEntity(missile);
-            System.out.println("hi");
-        }
-        context.getStack().damage(10, context.getPlayer(),
-                (player) -> player.sendToolBreakStatus(player.getActiveHand()));
-        return super.useOnBlock(context);
     }
 }

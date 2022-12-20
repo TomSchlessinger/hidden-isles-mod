@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "hiddenisles:item/trocellate_chestplate"
+  }
+}

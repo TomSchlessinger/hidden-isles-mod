@@ -20,6 +20,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraft.world.explosion.Explosion;
 import net.myshampooisdrunk.hiddenisles.entity.registry.EntityRegistry;
+import net.myshampooisdrunk.hiddenisles.util.MathUtils;
 
 import java.util.List;
 import java.util.Optional;
@@ -27,14 +28,16 @@ import java.util.Optional;
 public class TrocellateMissile extends PersistentProjectileEntity {
 
     private LivingEntity shooter;
+    private int type;//type 0 does damage, type 1 does no damage
 
     public TrocellateMissile(LivingEntity owner, World world) {
         super(EntityRegistry.MISSILE, owner, world);
     }
 
-    public TrocellateMissile(World world, double x, double y, double z, LivingEntity attacker) {
+    public TrocellateMissile(World world, double x, double y, double z, LivingEntity attacker, int type) {
         super(EntityRegistry.MISSILE, x, y, z, world);
         this.shooter = attacker;
+        this.type = type;
     }
 
     public TrocellateMissile(EntityType type, World world) {
@@ -49,7 +52,6 @@ public class TrocellateMissile extends PersistentProjectileEntity {
     @Override
     public void tick(){
         super.tick();
-        Vec3d vel = this.getVelocity();
         if (this.age >= 100) {
             this.remove(Entity.RemovalReason.DISCARDED);
         }
@@ -67,9 +69,7 @@ public class TrocellateMissile extends PersistentProjectileEntity {
     }
 
     @Override
-    public boolean hasNoGravity() {
-        return false;
-    }
+    public boolean hasNoGravity() {return false;}
 
     @Override
     public void onBlockHit(BlockHitResult blockHitResult) {
@@ -96,14 +96,26 @@ public class TrocellateMissile extends PersistentProjectileEntity {
         Vec3d vec3d = new Vec3d(this.getX(), this.getY(), this.getZ());
         for (int x = 0; x < list.size(); ++x) {
             Entity entity = (Entity) list.get(x);
-            double y = (double) (MathHelper.sqrt((float) entity.squaredDistanceTo(vec3d)) / q);
-            if (y <= 1.0D) {
+            double y = (double) (MathHelper.sqrt( (float) entity.squaredDistanceTo(vec3d)) / q);
+
+            if (y <= 2.0D) {
                 if (entity instanceof LivingEntity) {
-                    entity.damage(DamageSource.player((PlayerEntity) this.shooter), 20);
+                    if(this.type!=1){entity.damage(DamageSource.player((PlayerEntity) this.shooter), 15);}
                 }
                 this.world.createExplosion(this, this.getX(), this.getBodyY(0.0625D), this.getZ(), 0.0F,
                         Explosion.DestructionType.NONE);
             }
+            if(this.type==1){
+                System.out.println(MathUtils.map(5.5,0,10,0,100));
+                Vec3d posDiff = entity.getPos().subtract(this.getPos());//the difference in between the 2 positions
+                Vec3d mappedPos = new Vec3d(//turns a vector which will go from -5 to 5, to a vector that goes from -2 to 2
+                        MathUtils.map(posDiff.x,-4d,4d,-2d,2d),
+                        MathUtils.map(posDiff.y,-4d,4d,-1.2,2d),
+                        MathUtils.map(posDiff.z,-4d,4d,-2d,2d)
+                );
+                entity.setVelocity(mappedPos.x, mappedPos.y + 4 * mappedPos.y >= 0 ? 1:-1, mappedPos.z);
+            }
+
         }
     }
 
