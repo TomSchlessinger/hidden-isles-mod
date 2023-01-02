@@ -13,7 +13,6 @@ import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 
 public class HiddenIslesClient implements ClientModInitializer {
-    //public static boolean isActivated = false;
     public static KeyBinding ability;
 
     @Override
@@ -25,16 +24,6 @@ public class HiddenIslesClient implements ClientModInitializer {
                 GLFW.GLFW_KEY_R,
                 "category.hiddenisles.keys"
         ));
-
-        /*ClientTickEvents.END_CLIENT_TICK.register(client -> {
-            while (ability.wasPressed()) {
-                isActivated = true;
-            }
-            while (!ability.wasPressed()) {
-                isActivated = false;
-            }
-
-        });*/
 
     }
 }

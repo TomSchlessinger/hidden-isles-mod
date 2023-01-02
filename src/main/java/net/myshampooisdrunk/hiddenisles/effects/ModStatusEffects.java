@@ -1,5 +1,6 @@
 package net.myshampooisdrunk.hiddenisles.effects;
 
+import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.effect.StatusEffect;
@@ -11,6 +12,8 @@ import net.minecraft.util.registry.Registry;
 
 public class ModStatusEffects {
 
+    public static StatusEffect ASCONDELLUM_WEAKNESS;
+    public static StatusEffect STRONG_ARMS;
     public static StatusEffect PRISTINIUM_STRENGTH;
     public static StatusEffect COORDIUM_STRENGTH;
     public static StatusEffect BROKEN_ARMOR;
@@ -22,6 +25,17 @@ public class ModStatusEffects {
     }
 
     public static void registerEffects(){
+        ASCONDELLUM_WEAKNESS = register(1003,"hiddenisles:ascondellum_weakness", (new StatusEffect(StatusEffectCategory.HARMFUL, 1153513){public boolean canApplyUpdateEffect(int duration, int amplifier) {return true;}})
+                .addAttributeModifier(EntityAttributes.GENERIC_ARMOR, (MathHelper.randomUuid(ThreadLocalRandom.current())).toString(),-0.4D, EntityAttributeModifier.Operation.MULTIPLY_TOTAL)
+                .addAttributeModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED, (MathHelper.randomUuid(ThreadLocalRandom.current())).toString(),-0.2D, EntityAttributeModifier.Operation.MULTIPLY_TOTAL)
+                .addAttributeModifier(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, (MathHelper.randomUuid(ThreadLocalRandom.current())).toString(),-5D, EntityAttributeModifier.Operation.MULTIPLY_TOTAL)
+                .addAttributeModifier(EntityAttributes.GENERIC_ARMOR_TOUGHNESS, (MathHelper.randomUuid(ThreadLocalRandom.current())).toString(),-0.4D, EntityAttributeModifier.Operation.MULTIPLY_TOTAL)
+        );
+
+        STRONG_ARMS = register(1004,"hiddenisles:strong_arms",(new StatusEffect(StatusEffectCategory.BENEFICIAL, 1153513){public boolean canApplyUpdateEffect(int duration, int amplifier) {return true;}})
+                .addAttributeModifier(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, (MathHelper.randomUuid(ThreadLocalRandom.current())).toString(),0.5D, EntityAttributeModifier.Operation.MULTIPLY_TOTAL)
+        );
+
         PRISTINIUM_STRENGTH = register(1000,"hiddenisles:pristinium_strength",(new ModAbsorptionStatusEffect(StatusEffectCategory.BENEFICIAL,82133163){
             public boolean canApplyUpdateEffect(int duration, int amplifier) {return true;}
         })

@@ -1,8 +1,6 @@
 package net.myshampooisdrunk.hiddenisles.client.render;
 
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
-import net.minecraft.client.render.entity.model.EntityModelLayer;
-import net.minecraft.util.Identifier;
 import net.myshampooisdrunk.hiddenisles.entity.registry.EntityRegistry;
 import net.myshampooisdrunk.hiddenisles.entity.render.*;
 import net.myshampooisdrunk.hiddenisles.item.ModItems;
@@ -20,7 +18,5 @@ public class ModRenderRegistry {
         GeoArmorRenderer.registerArmorRenderer(new ArconlonRender(), ModItems.ARCONLON_BOOTS, ModItems.ARCONLON_CHESTPLATE,ModItems.ARCONLON_HELMET,ModItems.ARCONLON_LEGGINGS);
 
         EntityRendererRegistry.register(EntityRegistry.MISSILE, MissileEntityRender::new);
-
-
     }
 }

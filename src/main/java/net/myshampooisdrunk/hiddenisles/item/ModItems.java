@@ -15,7 +15,7 @@ public class ModItems {
     //ores
     public static final Item PRIMORDIUM_CLUSTER = registerItem( "primordium_cluster", new Item(new FabricItemSettings().group(ModItemGroup.HIDDENISLESTAB)) );
     public static final Item PRISTINIUM_CLUSTER = registerItem( "pristinium_cluster", new Item(new FabricItemSettings().group(ModItemGroup.HIDDENISLESTAB)) );
-    public static final Item COORDIUM_CLUSTER = registerItem( "coordoium_cluster", new Item(new FabricItemSettings().group(ModItemGroup.HIDDENISLESTAB)) );
+    public static final Item COORDIUM_CLUSTER = registerItem( "coordium_cluster", new Item(new FabricItemSettings().group(ModItemGroup.HIDDENISLESTAB)) );
     public static final Item TROCELLATE_CLUSTER = registerItem( "trocellate_cluster", new Item(new FabricItemSettings().group(ModItemGroup.HIDDENISLESTAB)) );
     public static final Item DOMDECON_CLUSTER = registerItem( "domdecon_cluster", new Item(new FabricItemSettings().group(ModItemGroup.HIDDENISLESTAB)) );
     public static final Item ASCONDELLUM_CLUSTER = registerItem( "ascondellum_cluster", new Item(new FabricItemSettings().group(ModItemGroup.HIDDENISLESTAB)) );
