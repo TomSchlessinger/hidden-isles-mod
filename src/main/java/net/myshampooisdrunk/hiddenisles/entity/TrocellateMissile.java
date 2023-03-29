@@ -69,8 +69,8 @@ public class TrocellateMissile extends PersistentProjectileEntity {
         super.onEntityHit(entityHitResult);
         if (!this.world.isClient) {
             this.doDamage();
-            this.world.createExplosion(this, this.getX(), this.getBodyY(0.0625D), this.getZ(), 1.7F, false,
-                    Explosion.DestructionType.NONE);
+            this.world.createExplosion(this, this.getX(), this.getBodyY(0.0625D), this.getZ(), 1.7F,
+                    World.ExplosionSourceType.NONE);
             this.remove(Entity.RemovalReason.DISCARDED);
         }
         this.setSound(SoundEvents.ENTITY_GENERIC_EXPLODE);
@@ -89,8 +89,8 @@ public class TrocellateMissile extends PersistentProjectileEntity {
         super.onBlockHit(blockHitResult);
         if (!this.world.isClient) {
             this.doDamage();
-            this.world.createExplosion(this, this.getX(), this.getBodyY(0.0625D), this.getZ(), 1.7F, false,
-                    Explosion.DestructionType.NONE);
+            this.world.createExplosion(this, this.getX(), this.getBodyY(0.0625D), this.getZ(), 1.7F,
+                    World.ExplosionSourceType.NONE);
             this.remove(Entity.RemovalReason.DISCARDED);
         }
         this.setSound(SoundEvents.ENTITY_GENERIC_EXPLODE);
@@ -115,7 +115,7 @@ public class TrocellateMissile extends PersistentProjectileEntity {
                 if (entity instanceof LivingEntity) {
                     if(this.type==0){entity.damage(DamageSource.player((PlayerEntity) this.shooter), 12);}
                 }
-                this.world.createExplosion(this, this.getX(), this.getBodyY(0.0625D), this.getZ(), 0F, Explosion.DestructionType.NONE);
+                this.world.createExplosion(this, this.getX(), this.getBodyY(0.0625D), this.getZ(), 0F,  World.ExplosionSourceType.NONE);
             }
             if(this.type==1){
                 Vec3d posDiff = entity.getPos().subtract(this.getPos());//the difference in between the 2 positions

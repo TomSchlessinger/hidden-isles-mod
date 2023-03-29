@@ -8,7 +8,7 @@ import net.myshampooisdrunk.hiddenisles.entity.registry.EntityRegistry;
 import net.myshampooisdrunk.hiddenisles.item.ModItems;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import software.bernie.geckolib3.GeckoLib;
+import software.bernie.geckolib.GeckoLib;
 
 public class HiddenIsles implements ModInitializer {
 	public static final String MOD_ID = "hiddenisles";
@@ -16,6 +16,7 @@ public class HiddenIsles implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
+
 		GeckoLib.initialize();
 		ModItems.registerModItems();
 		ModBlocks.registerModBlocks();

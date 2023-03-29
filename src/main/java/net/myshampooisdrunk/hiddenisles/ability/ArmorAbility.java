@@ -30,54 +30,61 @@ import java.util.List;
 import static net.myshampooisdrunk.hiddenisles.item.ModItems.*;
 import net.myshampooisdrunk.hiddenisles.util.Ability;
 import net.myshampooisdrunk.hiddenisles.util.ArmorCooldown;
-import net.myshampooisdrunk.hiddenisles.util.MathUtils;
 
 public class ArmorAbility extends Ability {
-    private final int cooldown;
+    private int cooldown;
     public ArmorAbility(World world, PlayerEntity player, ModArmorMaterials material){
         super(world,player,material);
-        if(material.equals(ModArmorMaterials.PRIMORDIUM)){
-            cooldown = ArmorAbilities.PRIMORDIUM.cooldown;
-        }else if(material.equals(ModArmorMaterials.PRISTINIUM) || material.equals(ModArmorMaterials.ARCONLON)){
-            cooldown = ArmorAbilities.PRISTINUM.cooldown;
+        if(material instanceof ModArmorMaterials){
+            if(material.equals(ModArmorMaterials.PRIMORDIUM)){
+                cooldown = ArmorAbilities.PRIMORDIUM.cooldown;
+            }else if(material.equals(ModArmorMaterials.PRISTINIUM) || material.equals(ModArmorMaterials.ARCONLON)){
+                cooldown = ArmorAbilities.PRISTINUM.cooldown;
+            }else{
+                cooldown = ArmorAbilities.COORDIUM.cooldown;
+            }
         }else{
-            cooldown = ArmorAbilities.COORDIUM.cooldown;
+            cooldown = 0;
         }
+
     }
 
     @Override
     public void useAbility() {
-        player.velocityModified = false;
         Vec3d pos = player.getPos();
         Vec3d lookVector = player.getRotationVector();
         switch(mat){
             default:
             case PRIMORDIUM:
-                double dashMult = 2.3;
                 if(!((ArmorCooldown)player).getManager().isCoolingDown(PRIMORDIUM_CHESTPLATE)){
-                    //System.out.println("cooldown off" + lookVector.toString());
-                    player.setVelocity(dashMult * lookVector.getX(), dashMult * lookVector.getY(), dashMult * lookVector.getZ());
+                    double dashMult = 2.3;
                     ((ArmorCooldown)player).getManager().set(PRIMORDIUM_CHESTPLATE, cooldown);
+                    player.setVelocity(dashMult * lookVector.getX(), dashMult * lookVector.getY(), dashMult * lookVector.getZ());
                     player.velocityModified = true;
                 }
+
                 break;
+
 
             case PRISTINIUM:
                 if(!((ArmorCooldown)player).getManager().isCoolingDown(PRISTINIUM_CHESTPLATE)) {
-                    player.addStatusEffect(new StatusEffectInstance(ModStatusEffects.PRISTINIUM_STRENGTH, 600, 0, true, true, false));
                     ((ArmorCooldown) player).getManager().set(PRISTINIUM_CHESTPLATE, cooldown);
+                    player.addStatusEffect(new StatusEffectInstance(ModStatusEffects.PRISTINIUM_STRENGTH, 600, 0, true, true, false));
                 }
+
                 break;
 
             case COORDIUM:
                 if(!((ArmorCooldown)player).getManager().isCoolingDown(COORDIUM_CHESTPLATE)){
-                    player.addStatusEffect(new StatusEffectInstance(ModStatusEffects.COORDIUM_STRENGTH, 400, 0, true, true, false));
                     ((ArmorCooldown) player).getManager().set(COORDIUM_CHESTPLATE, cooldown);
+                    player.addStatusEffect(new StatusEffectInstance(ModStatusEffects.COORDIUM_STRENGTH, 400, 0, true, true, false));
                 }
+                //System.out.println("Coordium: " + ((ArmorCooldown)player).getManager().isCoolingDown(COORDIUM_CHESTPLATE));
                 break;
 
             case TROCELLATE:
                 if(!((ArmorCooldown)player).getManager().isCoolingDown(TROCELLATE_CHESTPLATE)){
+                    ((ArmorCooldown) player).getManager().set(TROCELLATE_CHESTPLATE, cooldown);
                     Box targetBox = new Box(pos.x, pos.y, pos.z, pos.x, pos.y, pos.z);
                     targetBox = targetBox.expand(20);
                     List<Entity> PotTargets = player.getWorld().getOtherEntities(player, targetBox);//potential targets
@@ -106,26 +113,26 @@ public class ArmorAbility extends Ability {
                         missile.setVelocity(0.0d, -2.0d, 0.0d);
                         player.getWorld().spawnEntity(missile);
                     });
-                    ((ArmorCooldown) player).getManager().set(TROCELLATE_CHESTPLATE, cooldown);
                 }
                 break;
 
             case DOMDECON:
                 if(!((ArmorCooldown)player).getManager().isCoolingDown(DOMDECON_CHESTPLATE)){
+                    ((ArmorCooldown) player).getManager().set(DOMDECON_CHESTPLATE, cooldown);
                     Box effectBox = new Box(pos.x, pos.y, pos.z, pos.x, pos.y, pos.z);
                     effectBox = effectBox.expand(55.0);
                     List<Entity> EList = player.getWorld().getOtherEntities(player, effectBox);
                     EList.forEach(E -> {
                         if (E instanceof LivingEntity L && !(E instanceof ArmorStandEntity)) {
-                            L.addStatusEffect(new StatusEffectInstance(StatusEffects.GLOWING, 600, 0, true, false, false));
+                            L.addStatusEffect(new StatusEffectInstance(StatusEffects.GLOWING, 200, 0, true, false, false));
                         }
                     });
-                    ((ArmorCooldown) player).getManager().set(DOMDECON_CHESTPLATE, cooldown);
                 }
                 break;
 
             case ASCONDELLUM:
                 if(!((ArmorCooldown)player).getManager().isCoolingDown(ASCONDELLUM_CHESTPLATE)){
+                    ((ArmorCooldown) player).getManager().set(ASCONDELLUM_CHESTPLATE, cooldown);
                     Box targetBox = new Box(pos.x, pos.y, pos.z, pos.x, pos.y, pos.z);
                     targetBox = targetBox.expand(12,4,12);
                     List<Entity> PotTargets = player.getWorld().getOtherEntities(player, targetBox);//potential targets
@@ -144,24 +151,41 @@ public class ArmorAbility extends Ability {
                         T.setOnFireFor(15);
                     });
                     player.addStatusEffect(new StatusEffectInstance(ModStatusEffects.STRONG_ARMS,200,0,true,false,false));
-                    ((ArmorCooldown) player).getManager().set(ASCONDELLUM_CHESTPLATE, cooldown);
                 }
                 break;
 
             case ARCONLON:
                 if(!((ArmorCooldown)player).getManager().isCoolingDown(ARCONLON_CHESTPLATE)){
+                    ((ArmorCooldown) player).getManager().set(ARCONLON_CHESTPLATE, 900);
                     Vec3d finalPos = player.raycast(50d,1,false).getPos();
-                    world.playSound((PlayerEntity)null,player.getX(),player.getY(),player.getZ(), SoundEvents.ENTITY_ENDERMAN_TELEPORT, SoundCategory.NEUTRAL,50f,0.4F / (world.getRandom().nextFloat() * 0.4F + 0.8F));
-                    world.playSound((PlayerEntity)null,finalPos.x,finalPos.y,finalPos.z, SoundEvents.ENTITY_ENDERMAN_TELEPORT, SoundCategory.NEUTRAL,50f,0.4F / (world.getRandom().nextFloat() * 0.4F + 0.8F));
+                    world.playSound(null,player.getX(),player.getY(),player.getZ(), SoundEvents.ENTITY_ENDERMAN_TELEPORT, SoundCategory.NEUTRAL,50f,0.4F / (world.getRandom().nextFloat() * 0.4F + 0.8F));
+                    world.playSound(null,finalPos.x,finalPos.y,finalPos.z, SoundEvents.ENTITY_ENDERMAN_TELEPORT, SoundCategory.NEUTRAL,50f,0.4F / (world.getRandom().nextFloat() * 0.4F + 0.8F));
                     player.teleport(finalPos.x,finalPos.y,finalPos.z);
                     player.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS,150,3,true,false,false));
                     player.addStatusEffect(new StatusEffectInstance(StatusEffects.NAUSEA,100,0,true,false,false));
                     player.addStatusEffect(new StatusEffectInstance(StatusEffects.MINING_FATIGUE,100,1,true,false,false));
-                    ((ArmorCooldown) player).getManager().set(ARCONLON_CHESTPLATE, 900);
                 }
-                player.velocityModified = true;
                 break;
         }
+
+
+
+    }
+
+    @Override
+    public void changeMat(ModArmorMaterials material){
+        if(material instanceof ModArmorMaterials){
+            if(material.equals(ModArmorMaterials.PRIMORDIUM)){
+                cooldown = ArmorAbilities.PRIMORDIUM.cooldown;
+            }else if(material.equals(ModArmorMaterials.PRISTINIUM) || material.equals(ModArmorMaterials.ARCONLON)){
+                cooldown = ArmorAbilities.PRISTINUM.cooldown;
+            }else{
+                cooldown = ArmorAbilities.COORDIUM.cooldown;
+            }
+        }else{
+            cooldown = 0;
+        }
+        super.changeMat(material);
 
     }
 }

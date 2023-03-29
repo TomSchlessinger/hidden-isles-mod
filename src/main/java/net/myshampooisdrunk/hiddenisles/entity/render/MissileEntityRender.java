@@ -8,7 +8,7 @@ import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3f;
+import net.minecraft.util.math.RotationAxis;
 import net.myshampooisdrunk.hiddenisles.HiddenIsles;
 import net.myshampooisdrunk.hiddenisles.entity.TrocellateMissile;
 import net.myshampooisdrunk.hiddenisles.entity.model.MissileModel;
@@ -26,10 +26,10 @@ public class MissileEntityRender extends EntityRenderer<TrocellateMissile> {
         stack.push();
         int step = 5;
         float missileRoll = (step*missile.getRotationTicks())%360;
-        stack.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(MathHelper.lerp(g, missile.prevYaw, missile.getYaw()) - 90.0F));
-        stack.multiply(Vec3f.POSITIVE_Z.getDegreesQuaternion(MathHelper.lerp(g, missile.prevPitch, missile.getPitch()) + 90.0F));
+        stack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(MathHelper.lerp(g, missile.prevYaw, missile.getYaw()) - 90.0F));
+        stack.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(MathHelper.lerp(g, missile.prevPitch, missile.getPitch()) + 90.0F));
         stack.translate(0.5d,-1d,0d);
-        stack.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(missileRoll));
+        stack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(missileRoll));
         VertexConsumer consumer = provider.getBuffer(this.model.getLayer(this.getTexture(missile)));
 
         model.render(stack,consumer,i, OverlayTexture.DEFAULT_UV,1.0f,1.0f,1.0f,1.0f);
